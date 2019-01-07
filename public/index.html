@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>Admin Portal - Presales Game</title>
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="./scripts/script.js"></script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Admin Portal - Presales Game</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container" style="width: 80%">
+		  <div class="row">
+			<div class="col-lg-12 text-center">
+				
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#capi">Companies API</a>
+							</h4>
+						</div>
+						<div id="capi" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#compmodal">Create Company</button>
+								<button type="button" class="btn btn-primary" onclick="deleteCompanies();">Delete All Companies</button>
+								<button type="button" class="btn btn-primary">Send Message</button>
+								<button type="button" class="btn btn-primary">Delete Messages</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#oapi">Opportunities API</a>
+							</h4>
+						</div>
+						<div id="oapi" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<button type="button" class="btn btn-primary">Generate New Opportunities</button>
+								<button type="button" class="btn btn-primary">Get All Opportunities</button>
+								<button type="button" class="btn btn-primary">Delete All Opportunities</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#mapi">Market API</a>
+							</h4>
+						</div>
+						<div id="mapi" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<button type="button" class="btn btn-primary">Get Current Querter</button>
+								<button type="button" class="btn btn-primary">Run Market Competition</button>
+								<button type="button" class="btn btn-primary">Initialize Database</button>
+								<button type="button" class="btn btn-primary">Presales Evaluation</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#papi">Presales API</a>
+							</h4>
+						</div>
+						<div id="papi" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<button type="button" class="btn btn-primary">Generate Presales</button>
+								<button type="button" class="btn btn-primary">Get Presales</button>
+								<button type="button" class="btn btn-primary">Delete Presales</button>
+								<button type="button" class="btn btn-primary">Get Presale by ID</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#comps">Companies</a>
+								<button type="button" class="btn btn-primary right" onclick="getCompanies();">Refresh</button>
+							</h4>
+						</div>
+						<div id="comps" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<table class="table table-striped text-left">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Name</th>
+											<th># of Presales</th>
+											<th># of Opportunities</th>
+											<th>Market Recognition</th>
+											<th>Money</th>
+											<th>Hours</th>
+											<th>BAM</th>
+											<th>TOP</th>
+											<th>Bankrupt</th>
+										</tr>
+									</thead>
+									<tbody id="companiestable">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+
+
+		<!--Create Company Modal -->
+		<div id="compmodal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Create Company</h4>
+		      </div>
+		      <div class="modal-body">
+		        <input type="text" class="form-control" placeholder="Name" id="compname">
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      	<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="createCompany(document.getElementById('compname').value)">Create</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+
+		<!--Company Modal -->
+		<div id="compdetailsmodal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Company Details</h4>
+		      </div>
+		      <div class="modal-body" id="detailsbody">
+		        
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+		
+	</body>
+</html>
