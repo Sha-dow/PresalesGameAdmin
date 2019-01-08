@@ -40,8 +40,6 @@
 							<div class="panel-body">
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#compmodal">Create Company</button>
 								<button type="button" class="btn btn-primary" onclick="deleteCompanies();">Delete All Companies</button>
-								<button type="button" class="btn btn-primary">Send Message</button>
-								<button type="button" class="btn btn-primary">Delete Messages</button>
 							</div>
 						</div>
 					</div>
@@ -170,7 +168,8 @@
 		        <h4 class="modal-title">Company Details</h4>
 		      </div>
 		      <div class="modal-body" id="detailsbody">
-		        
+		      	<div id="featureslist"></div>
+		        <table class="table table-striped text-left" id="productfeaturestable"></table>
 		      </div>
 		      <div class="modal-footer">
 		      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

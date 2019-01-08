@@ -152,22 +152,69 @@ function openCompany(id) {
 		var resp = JSON.parse(response);
 	    var data = resp.data;
 
-		var parent = document.getElementById('detailsbody');
+		var parent = document.getElementById('featureslist');
 		parent.innerHTML = '';
 		var info = document.createElement('ul');
 
-		var idtext = document.createTextNode('Company ID: ' + id);
 		var idlist = document.createElement('li');
-		idlist.appendChild(idtext);
+		idlist.appendChild(document.createTextNode('Company ID: ' + id));
 		info.appendChild(idlist);
 		
-
-		var nametext = document.createTextNode('Name: ' + data.name);
 		var namelist = document.createElement('li');
-		namelist.appendChild(nametext);
+		namelist.appendChild(document.createTextNode('Name: ' + data.name));
 		info.appendChild(namelist);
 
+		var blist = document.createElement('li');
+		blist.appendChild(document.createTextNode('BAM Enabled: ' + data.isBAMEnabled));
+		info.appendChild(blist);
+
+		var tlist = document.createElement('li');
+		tlist.appendChild(document.createTextNode('TOP Enabled: ' + data.isTOPEnabled));
+		info.appendChild(tlist);
+
+		var balist = document.createElement('li');
+		balist.appendChild(document.createTextNode('Bankrupted: ' + data.isBankrupt));
+		info.appendChild(balist);
+
+		var mlist = document.createElement('li');
+		mlist.appendChild(document.createTextNode('Money: ' + data.budget));
+		info.appendChild(mlist);
+
+		var hlist = document.createElement('li');
+		hlist.appendChild(document.createTextNode('Hours: ' + data.totalHours));
+		info.appendChild(hlist);
+
+		var malist = document.createElement('li');
+		malist.appendChild(document.createTextNode('Market Recognition: ' + data.brendRecognition));
+		info.appendChild(malist);
+
 		parent.appendChild(info);
+
+		var tableheader = document.createElement('b');
+		tableheader.appendChild(document.createTextNode('Product Basic Features'));
+		info.appendChild(document.createElement('hr'));
+		info.appendChild(tableheader);
+
+		var table = document.getElementById('productfeaturestable');
+		table.innerHTML = '';
+		var tbody = document.createElement('tbody');
+		
+		for (var i = 0; i < data.ProductBasicFeatures.length; i++) {
+			var row = document.createElement('tr');
+
+			var ncell = document.createElement('td');
+			ncell.appendChild(document.createTextNode(data.ProductBasicFeatures[i].name));
+			row.appendChild(ncell);
+
+			var scell = document.createElement('td');
+			scell.appendChild(document.createTextNode(data.ProductBasicFeatures[i].score));
+			row.appendChild(scell);
+
+			tbody.appendChild(row);
+		}
+
+		table.appendChild(tbody);
+		
 
 		$('#compdetailsmodal').modal('show');
 	};
@@ -178,3 +225,8 @@ function openCompany(id) {
 
 	request.send();
 }
+
+window.addEventListener('load', function() {
+    console.log('Page loaded!')
+    getCompanies();
+})
