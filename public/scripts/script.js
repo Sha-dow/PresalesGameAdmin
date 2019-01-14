@@ -130,6 +130,7 @@ function createCompany(name) {
 
 	request.success = function(response) {
     	console.log("Success: Company created!");
+    	getCompanies();
 	};
 
 	request.fail = function(error) {
@@ -150,6 +151,7 @@ function deleteCompanies() {
 
 	request.success = function(response) {
     	console.log("Success: Companies Deleted!");
+    	getCompanies();
 	};
 
 	request.fail = function(error) {
@@ -248,11 +250,115 @@ function openCompany(id) {
 //Opportunity Functions
 function getOpportunities() {
 	console.log("getOpportunities called");
+
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = path + "/opportunities";
+
+	request.success = function(response) {
+    	console.log("Success: Opportunities fetched!");
+    	var resp = JSON.parse(response);
+	    var data = resp.data;
+	    var keys = Object.keys(data);
+
+	    var parent = document.getElementById("oppstable");
+	    parent.innerHTML = '';
+
+	    for(var i = 0; i < keys.length; i++) {
+	    	var opp = data[keys[i]];
+	    	
+	    	var row = parent.insertRow(0);
+	    	var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
+			var cell6 = row.insertCell(5);
+			var cell7 = row.insertCell(6);
+			var cell8 = row.insertCell(7);
+			var cell9 = row.insertCell(8);
+			var cell10 = row.insertCell(9);
+
+			cell1.innerHTML = opp.ID;
+			cell2.innerHTML = opp.CompanyName;
+			cell3.innerHTML = opp.TTC;
+			cell4.innerHTML = opp.associatedCost;
+			cell5.innerHTML = opp.qualificationLevel;
+			cell6.innerHTML = opp.realOppyValue;
+			cell7.innerHTML = opp.status;
+			cell8.innerHTML = opp.teoricalValue;
+			cell9.innerHTML = opp.variationPerc;
+			cell10.innerHTML = opp.winner;
+	    }
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
+function generateOpportunities(amount) {
+	var request = new httpRequest();
+	request.method = "POST";
+	request.url = path + "/opportunities";
+
+	request.success = function(response) {
+    	console.log("Success: Opportunities created!");
+    	getOpportunities();
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.data = JSON.stringify({
+    	num: amount
+	});
+
+	request.send();
+}
+
+function deleteOpportunities() {
+	var request = new httpRequest();
+	request.method = "DELETE";
+	request.url = path + "/opportunities";
+
+	request.success = function(response) {
+    	console.log("Success: Opportunities Deleted!");
+    	getOpportunities();
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
 }
 
 //Presales Functions
 function getPresales() {
 	console.log("getPresales called");
+
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = path + "/presales";
+
+	request.success = function(response) {
+    	console.log("Success: Presales fetched!");
+    	var resp = JSON.parse(response);
+	    var data = resp.data;
+	    var keys = Object.keys(data);
+
+	    console.log(data);
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
 }
 
 window.addEventListener('load', function() {

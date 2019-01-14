@@ -54,9 +54,8 @@
 						</div>
 						<div id="oapi" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<button type="button" class="btn btn-primary">Generate New Opportunities</button>
-								<button type="button" class="btn btn-primary">Get All Opportunities</button>
-								<button type="button" class="btn btn-primary">Delete All Opportunities</button>
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#oppsmodal">Generate New Opportunities</button>
+								<button type="button" class="btn btn-primary" onclick="deleteOpportunities();">Delete All Opportunities</button>
 							</div>
 						</div>
 					</div>
@@ -92,7 +91,6 @@
 								<button type="button" class="btn btn-primary">Generate Presales</button>
 								<button type="button" class="btn btn-primary">Get Presales</button>
 								<button type="button" class="btn btn-primary">Delete Presales</button>
-								<button type="button" class="btn btn-primary">Get Presale by ID</button>
 							</div>
 						</div>
 					</div>
@@ -145,11 +143,15 @@
 									<thead>
 										<tr>
 											<th>ID</th>
-											<th>Name</th>
-											<th>-</th>
-											<th>-</th>
-											<th>-</th>
-											<th>-</th>
+											<th>Company Name</th>
+											<th>TTC</th>
+											<th>Associated Cost</th>
+											<th>Qualification Level</th>
+											<th>Real Oppy Value</th>
+											<th>Status</th>
+											<th>Teorical Value</th>
+											<th>Variation %</th>
+											<th>Winner</th>
 										</tr>
 									</thead>
 									<tbody id="oppstable">
@@ -233,6 +235,28 @@
 		      </div>
 		      <div class="modal-footer">
 		      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+
+		<!--Create Opportunities Modal -->
+		<div id="oppsmodal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Create Opportunities</h4>
+		      </div>
+		      <div class="modal-body">
+		        <input type="text" class="form-control" placeholder="Amount" id="oppnum">
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      	<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="generateOpportunities(document.getElementById('oppnum').value)">Create</button>
 		      </div>
 		    </div>
 
