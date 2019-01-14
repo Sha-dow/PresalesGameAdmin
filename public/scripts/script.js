@@ -1,4 +1,5 @@
 var path = "http://localhost:3000/api/v1";
+var authToken = null;
 
 //General helper for HTTP-requests
 function httpRequest() {
@@ -15,6 +16,7 @@ function httpRequest() {
         ajax.open(this.method, this.url, this.async);
         ajax.setRequestHeader('gameid', 'm');
 		ajax.setRequestHeader('Content-Type', 'application/json');
+		ajax.setRequestHeader('x-access-token', authToken);
         ajax.send(this.data);
     };
 
@@ -49,6 +51,23 @@ function httpRequest() {
             }
         }
     };
+}
+
+//General helper for getting a cookie value
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
 //Company functions
@@ -226,7 +245,20 @@ function openCompany(id) {
 	request.send();
 }
 
+//Opportunity Functions
+function getOpportunities() {
+	console.log("getOpportunities called");
+}
+
+//Presales Functions
+function getPresales() {
+	console.log("getPresales called");
+}
+
 window.addEventListener('load', function() {
+	authToken = getCookie('x-access-token');
     console.log('Page loaded!')
     getCompanies();
+    getOpportunities();
+    getPresales();
 })
