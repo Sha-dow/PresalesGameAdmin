@@ -114,6 +114,8 @@ function getCompanies() {
 			cell9.innerHTML = comp.isTOPEnabled;
 			cell10.innerHTML = comp.isBankrupt;
 	    }
+
+	    $('#compsdt').DataTable();
 	};
 
 	request.fail = function(error) {
@@ -290,6 +292,8 @@ function getOpportunities() {
 			cell9.innerHTML = opp.variationPerc;
 			cell10.innerHTML = opp.winner;
 	    }
+
+	    $('#oppsdt').DataTable();
 	};
 
 	request.fail = function(error) {
@@ -351,7 +355,31 @@ function getPresales() {
 	    var data = resp.data;
 	    var keys = Object.keys(data);
 
-	    console.log(data);
+	    var parent = document.getElementById("pretable");
+	    parent.innerHTML = '';
+
+	    for(var i = 0; i < keys.length; i++) {
+	    	var person = data[keys[i]].person;
+	    	
+	    	var row = parent.insertRow(0);
+	    	var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
+			var cell6 = row.insertCell(5);
+			var cell7 = row.insertCell(6);
+
+			cell1.innerHTML = '<a onclick="openPresale(\'' + person.ID + '\');">' + person.ID + '</a>';
+			cell2.innerHTML = person.name;
+			cell3.innerHTML = person.cost;
+			cell4.innerHTML = person.satisfactionLevel;
+			cell5.innerHTML = person.employedBy;
+			cell6.innerHTML = person.isEmployed;
+			cell7.innerHTML = person.timePerQuarter;
+	    }
+
+	    $('#predt').DataTable();
 	};
 
 	request.fail = function(error) {

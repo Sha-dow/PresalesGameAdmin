@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+		<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<script src="./scripts/script.js"></script>
 	</head>
 
@@ -106,7 +108,7 @@
 						</div>
 						<div id="comps" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<table class="table table-striped text-left">
+								<table class="table table-striped text-left" id="compsdt">
 									<thead>
 										<tr>
 											<th>ID</th>
@@ -139,7 +141,7 @@
 						</div>
 						<div id="opps" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<table class="table table-striped text-left">
+								<table class="table table-striped text-left" id="oppsdt">
 									<thead>
 										<tr>
 											<th>ID</th>
@@ -172,15 +174,16 @@
 						</div>
 						<div id="pre" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<table class="table table-striped text-left">
+								<table class="table table-striped text-left" id="predt">
 									<thead>
 										<tr>
 											<th>ID</th>
 											<th>Name</th>
-											<th>-</th>
-											<th>-</th>
-											<th>-</th>
-											<th>-</th>
+											<th>Cost</th>
+											<th>Satisfaction Level</th>
+											<th>Employed By</th>
+											<th>Is Employed</th>
+											<th>Time per Quarter</th>
 										</tr>
 									</thead>
 									<tbody id="pretable">
