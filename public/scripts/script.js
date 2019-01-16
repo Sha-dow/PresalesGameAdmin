@@ -247,13 +247,9 @@ function openCompany(id) {
 
 		parent.appendChild(info);
 
-		var tableheader = document.createElement('b');
-		tableheader.appendChild(document.createTextNode('Product Basic Features'));
-		info.appendChild(document.createElement('hr'));
-		info.appendChild(tableheader);
-
 		var table = document.getElementById('productfeaturestable');
 		table.innerHTML = '';
+
 		var tbody = document.createElement('tbody');
 		
 		for (var i = 0; i < data.ProductBasicFeatures.length; i++) {
@@ -271,7 +267,83 @@ function openCompany(id) {
 		}
 
 		table.appendChild(tbody);
+
+		table = document.getElementById('messagestable');
+		table.innerHTML = '';
+
+		tbody = document.createElement('tbody');
+
+		for (var i = 0; i < data.messages.length; i++) {
+			var row = document.createElement('tr');
+
+			var ncell = document.createElement('td');
+			ncell.appendChild(document.createTextNode(data.messages[i].type));
+			row.appendChild(ncell);
+
+			var scell = document.createElement('td');
+			scell.appendChild(document.createTextNode(data.messages[i].msg));
+			row.appendChild(scell);
+
+			tbody.appendChild(row);
+		}
+
+		table.appendChild(tbody);
+
+		table = document.getElementById('oppycompetedtable');
+		table.innerHTML = '';
+
+		thead = document.createElement('thead');
+		hrow = document.createElement('tr');
+
+		var headers = ['ID','Quarter','Initial Value','Close Value','TTC','Cost','Budget', 'Hours Left', 'IDX', 'Outcome'];
 		
+		for(var i = 0; i < headers.length; i++) {
+			hcell = document.createElement('th');
+			hcell.appendChild(document.createTextNode(headers[i]));
+			hrow.appendChild(hcell);	
+		}
+
+		thead.appendChild(hrow);
+		table.appendChild(thead);
+
+		tbody = document.createElement('tbody');
+		var oppykeys = Object.keys(data.oppyCompeted);
+
+		for (var i = 0; i < oppykeys.length; i++) {
+			var item = data.oppyCompeted[oppykeys[i]];
+			var row = document.createElement('tr');
+
+			var acell = document.createElement('td');
+			acell.appendChild(document.createTextNode(oppykeys[i]));
+			row.appendChild(acell);
+			var rowkeys = Object.keys(item);
+			
+			for(var j = 0; j < rowkeys.length; j++) {
+				var bcell = document.createElement('td');
+				bcell.appendChild(document.createTextNode(item[rowkeys[j]]));
+				row.appendChild(bcell);				
+			}
+
+			tbody.appendChild(row);
+		}
+
+		table.appendChild(tbody);
+
+		table = document.getElementById('presalestable');
+		table.innerHTML = '';
+		tbody = document.createElement('tbody');
+		
+		for (var i = 0; i < data.presalesTeam.length; i++) {
+			var row = document.createElement('tr');
+
+			var acell = document.createElement('td');
+			acell.innerHTML = '<a onclick="openPresale(\'' + data.presalesTeam[i] + '\');">' + data.presalesTeam[i] + '</a>';
+			row.appendChild(acell);
+
+			tbody.appendChild(row);
+		}
+
+		table.appendChild(tbody);
 
 		$('#compdetailsmodal').modal('show');
 	};

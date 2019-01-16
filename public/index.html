@@ -222,7 +222,7 @@
 
 		<!--Company Modal -->
 		<div id="compdetailsmodal" class="modal fade" role="dialog">
-		  <div class="modal-dialog">
+		  <div class="modal-dialog modal-lg" style="width:70%">
 
 		    <!-- Modal content-->
 		    <div class="modal-content">
@@ -232,7 +232,101 @@
 		      </div>
 		      <div class="modal-body" id="detailsbody">
 		      	<div id="featureslist"></div>
-		        <table class="table table-striped text-left" id="productfeaturestable"></table>
+		      	<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#pdp">Basic Product Features</a>
+							</h4>
+						</div>
+						<div id="pdp" class="panel-collapse collapse in">
+							<div class="panel-body">
+		        				<table class="table table-striped text-left" id="productfeaturestable"></table>
+		        			</div>
+		        		</div>
+		        	</div>
+		        </div>
+
+		        <div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#msg">Messages</a>
+							</h4>
+						</div>
+						<div id="msg" class="panel-collapse collapse in">
+							<div class="panel-body">
+		        				<table class="table table-striped text-left" id="messagestable"></table>
+		        			</div>
+		        		</div>
+		        	</div>
+		        </div>
+
+		        <div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#oc">Opportunities Competed</a>
+							</h4>
+						</div>
+						<div id="oc" class="panel-collapse collapse in">
+							<div class="panel-body">
+		        				<table class="table table-striped text-left" id="oppycompetedtable"></table>
+		        			</div>
+		        		</div>
+		        	</div>
+		        </div>
+
+		         <div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#ptc">People to Confirm</a>
+							</h4>
+						</div>
+						<div id="ptc" class="panel-collapse collapse in">
+							<div class="panel-body">
+		        				<table class="table table-striped text-left" id="peopletoconfirmtable"></table>
+		        			</div>
+		        		</div>
+		        	</div>
+		        </div>
+
+		        <div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#pt">Presales Team</a>
+							</h4>
+						</div>
+						<div id="pt" class="panel-collapse collapse in">
+							<div class="panel-body">
+		        				<table class="table table-striped text-left" id="presalestable"></table>
+	        				</div>
+	        			</div>
+	        		</div>
+	        	</div>
+
+	        	 <div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" href="#ac">Actions</a>
+							</h4>
+						</div>
+						<div id="ac" class="panel-collapse collapse in">
+							<div class="panel-body">
+		        				<button type="button" class="btn btn-primary">Send Message</button>
+		        				<button type="button" class="btn btn-primary">Delete Messages</button>
+		        				<button type="button" class="btn btn-primary">Enable BAM</button>
+		        				<button type="button" class="btn btn-primary">Disable BAM</button>
+		        				<button type="button" class="btn btn-primary">Enable TOP</button>
+		        				<button type="button" class="btn btn-primary">Disable TOP</button>
+	        				</div>
+	        			</div>
+	        		</div>
+	        	</div>
+
 		      </div>
 		      <div class="modal-footer">
 		      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
