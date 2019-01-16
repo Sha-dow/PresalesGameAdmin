@@ -89,7 +89,6 @@ function getCompanies() {
 
 	    for(var i = 0; i < keys.length; i++) {
 	    	var comp = data[keys[i]];
-	    	console.log(comp);
 
 	    	var row = parent.insertRow(0);
 	    	var cell1 = row.insertCell(0);
@@ -132,7 +131,7 @@ function createCompany(name) {
 
 	request.success = function(response) {
     	console.log("Success: Company created!");
-    	getCompanies();
+    	location.reload();
 	};
 
 	request.fail = function(error) {
@@ -153,7 +152,7 @@ function deleteCompanies() {
 
 	request.success = function(response) {
     	console.log("Success: Companies Deleted!");
-    	getCompanies();
+    	location.reload();
 	};
 
 	request.fail = function(error) {
@@ -174,6 +173,8 @@ function openCompany(id) {
 		
 		var resp = JSON.parse(response);
 	    var data = resp.data;
+
+	    console.log(data);
 
 		var parent = document.getElementById('featureslist');
 		parent.innerHTML = '';
@@ -310,7 +311,7 @@ function generateOpportunities(amount) {
 
 	request.success = function(response) {
     	console.log("Success: Opportunities created!");
-    	getOpportunities();
+    	location.reload();
 	};
 
 	request.fail = function(error) {
@@ -331,7 +332,7 @@ function deleteOpportunities() {
 
 	request.success = function(response) {
     	console.log("Success: Opportunities Deleted!");
-    	getOpportunities();
+    	location.reload();
 	};
 
 	request.fail = function(error) {
@@ -389,10 +390,149 @@ function getPresales() {
 	request.send();
 }
 
+function deletePresales() {
+	var request = new httpRequest();
+	request.method = "DELETE";
+	request.url = path + "/presales";
+
+	request.success = function(response) {
+    	console.log("Success: Presales Deleted!");
+    	location.reload();
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
+function generatePresales(amount) {
+	var request = new httpRequest();
+	request.method = "POST";
+	request.url = path + "/presales";
+
+	request.success = function(response) {
+    	console.log("Success: Presales created!");
+    	location.reload();
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.data = JSON.stringify({
+    	num: amount
+	});
+
+	request.send();
+}
+
+function openPresale(id) {
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = path + "/presales/" + id;
+
+	request.success = function(response) {
+    	console.log("Success: Presale information fetched!");
+		
+		var resp = JSON.parse(response);
+	    var data = resp.data;
+
+		var parent = document.getElementById('infolist');
+		parent.innerHTML = '';
+		var info = document.createElement('ul');
+
+		console.log(data);
+		
+
+		$('#predetailsmodal').modal('show');
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
+//Market functions
+function runCompetition() {
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = path + "/market/nextPeriod";
+
+	request.success = function(response) {
+    	console.log("Success: Moved game to Next Quarter!");
+    	location.reload();
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
+function initDB() {
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = path + "/market/initDb";
+
+	request.success = function(response) {
+    	console.log("Success: Database Initialized!");
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
+function evalPresales() {
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = path + "/market/evaluate";
+
+	request.success = function(response) {
+		var resp = JSON.parse(response);
+	    var data = resp.data;
+    	console.log("Success: Presales evaluated. Results: ", data);
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
+function getQuarter() {
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = path + "/market/quarter";
+
+	request.success = function(response) {
+    	console.log("Success: Fetched Current Quarter");
+    	var resp = JSON.parse(response);
+	    var data = resp.data;
+	    var parent = document.getElementById('quarter');
+	    parent.innerHTML = 'Admin Portal - Presales Game | Current Quarter: ' + data;
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
 window.addEventListener('load', function() {
 	authToken = getCookie('x-access-token');
     console.log('Page loaded!')
     getCompanies();
     getOpportunities();
     getPresales();
+    getQuarter();
 })
