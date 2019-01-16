@@ -4,7 +4,8 @@
   "description": "Admin portal for Presales Game",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "SET HOST=http://localhost:3000/api/v1 & node server.js"
   },
   "author": "Hannu Ranta",
   "license": "MIT",

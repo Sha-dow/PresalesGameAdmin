@@ -1,4 +1,4 @@
-var path = "http://localhost:3000/api/v1";
+path = null;
 var authToken = null;
 
 //General helper for HTTP-requests
@@ -68,6 +68,39 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+//General helper for getting a cookie
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+//General helper for deleting a cookie
+function delCookie(name) {
+    document.cookie = name +
+    '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+}
+
+function getPath() {
+	var request = new httpRequest();
+	request.method = "GET";
+	request.url = "/path";
+
+	request.success = function(response) {
+    	console.log("Path fetched!");
+    	console.log(response);
+    	setCookie('path', response, 1);
+    	location.reload();
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
 }
 
 //Company functions
@@ -529,10 +562,17 @@ function getQuarter() {
 }
 
 window.addEventListener('load', function() {
-	authToken = getCookie('x-access-token');
-    console.log('Page loaded!')
-    getCompanies();
-    getOpportunities();
-    getPresales();
-    getQuarter();
+	var p = getCookie('path');
+	if(p == '') {
+		getPath();
+	}
+	else {
+		path = getCookie('path');
+		authToken = getCookie('x-access-token');
+	    console.log('Page loaded!')
+	    getCompanies();
+	    getOpportunities();
+	    getPresales();
+	    getQuarter();
+	}
 })
