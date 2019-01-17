@@ -332,7 +332,7 @@ function openCompany(id) {
 		table = document.getElementById('presalestable');
 		table.innerHTML = '';
 		tbody = document.createElement('tbody');
-		
+
 		for (var i = 0; i < data.presalesTeam.length; i++) {
 			var row = document.createElement('tr');
 
@@ -549,6 +549,36 @@ function openPresale(id) {
 		var info = document.createElement('ul');
 
 		console.log(data);
+
+		var idlist = document.createElement('li');
+		idlist.appendChild(document.createTextNode('ID: ' + id));
+		info.appendChild(idlist);
+		
+		var namelist = document.createElement('li');
+		namelist.appendChild(document.createTextNode('Name: ' + data.person.name));
+		info.appendChild(namelist);
+
+		var alist = document.createElement('li');
+		alist.appendChild(document.createTextNode('Cost: ' + data.person.cost));
+		info.appendChild(alist);
+
+		var blist = document.createElement('li');
+		blist.appendChild(document.createTextNode('Employed By: ' + data.person.employedBy));
+		info.appendChild(blist);
+
+		var clist = document.createElement('li');
+		clist.appendChild(document.createTextNode('Employed: ' + data.person.isEmployed));
+		info.appendChild(clist);
+
+		var dlist = document.createElement('li');
+		dlist.appendChild(document.createTextNode('Satisfaction Level: ' + data.person.satisfactionLevel));
+		info.appendChild(dlist);
+
+		var elist = document.createElement('li');
+		elist.appendChild(document.createTextNode('Time per Quarter: ' + data.person.timePerQuarter));
+		info.appendChild(elist);
+
+		parent.appendChild(info);
 		
 
 		$('#predetailsmodal').modal('show');
