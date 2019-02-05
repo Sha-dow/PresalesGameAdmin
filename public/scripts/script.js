@@ -1,4 +1,4 @@
-path = null;
+path = window.location.protocol+"//"+window.location.host+"/api/v1";
 var authToken = null;
 
 //General helper for HTTP-requests
@@ -17,6 +17,7 @@ function httpRequest() {
         ajax.setRequestHeader('gameid', 'm');
 		ajax.setRequestHeader('Content-Type', 'application/json');
 		ajax.setRequestHeader('x-access-token', authToken);
+		console.log(this.data);
         ajax.send(this.data);
     };
 
@@ -87,11 +88,10 @@ function delCookie(name) {
 function getPath() {
 	var request = new httpRequest();
 	request.method = "GET";
-	request.url = "/path";
+	request.url = window.location.pathname + "/path";
 
 	request.success = function(response) {
     	console.log("Path fetched!");
-    	console.log(response);
     	setCookie('path', response, 1);
     	location.reload();
 	};
@@ -649,7 +649,7 @@ function getQuarter() {
 	request.url = path + "/market/quarter";
 
 	request.success = function(response) {
-    	console.log("Success: Fetched Current Quarter");
+		console.log("Success: Fetched Current Quarter");
     	var resp = JSON.parse(response);
 	    var data = resp.data;
 	    var parent = document.getElementById('quarter');
@@ -664,12 +664,23 @@ function getQuarter() {
 }
 
 window.addEventListener('load', function() {
+
+	console.log("path ---> "+path);
+	authToken = getCookie('x-access-token');
+	console.log('Page loaded!')
+	getCompanies();
+	getOpportunities();
+	getPresales();
+	getQuarter();
+
+	/*	
 	var p = getCookie('path');
-	if(p == '') {
+	if((p == '') || (p == null)){
 		getPath();
 	}
 	else {
 		path = getCookie('path');
+		
 		authToken = getCookie('x-access-token');
 	    console.log('Page loaded!')
 	    getCompanies();
@@ -677,4 +688,5 @@ window.addEventListener('load', function() {
 	    getPresales();
 	    getQuarter();
 	}
+	*/
 })
