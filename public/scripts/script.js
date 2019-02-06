@@ -409,7 +409,7 @@ function getOpportunities() {
 	request.send();
 }
 
-function generateOpportunities(amount) {
+function generateOpportunities(numComp, minVal, maxVal, minTTC, maxTTC) {
 	var request = new httpRequest();
 	request.method = "POST";
 	request.url = path + "/opportunities";
@@ -424,7 +424,11 @@ function generateOpportunities(amount) {
 	};
 
 	request.data = JSON.stringify({
-    	num: amount
+		num: numComp,
+		minValue : minVal,
+		maxValue : maxVal,
+		minTTC : minTTC,
+		maxTTC : maxTTC
 	});
 
 	request.send();
