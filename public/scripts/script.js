@@ -613,6 +613,24 @@ function runCompetition() {
 	request.send();
 }
 
+//Market functions
+function brandRecognition() {
+	var request = new httpRequest();
+	request.method = "POST";
+	request.url = path + "/market/BRShare";
+
+	request.success = function(response) {
+    	console.log("Success: Brand Recognition");
+    	location.reload();
+	};
+
+	request.fail = function(error) {
+	    console.log(error);
+	};
+
+	request.send();
+}
+
 function initDB() {
 	var request = new httpRequest();
 	request.method = "GET";
