@@ -2,7 +2,7 @@ module.exports = function (app) {
 	
 	app.get('/path', function(req, res) {
 		console.log('Path required. Sending...');
-		console.log(process.env.HOST);
+		console.log("HOST --> " + process.env.HOST);
 		res.send(process.env.HOST);
 	});
 

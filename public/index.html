@@ -72,6 +72,7 @@
 						</div>
 						<div id="mapi" class="panel-collapse collapse in">
 							<div class="panel-body">
+								<button type="button" class="btn btn-primary" onclick="brandRecognition();">Brand Recognition</button>
 								<button type="button" class="btn btn-primary" onclick="runCompetition();">Run Market Competition</button>
 								<button type="button" class="btn btn-primary" onclick="initDB();">Initialize Database</button>
 								<button type="button" class="btn btn-primary" onclick="evalPresales();">Presales Evaluation</button>
@@ -347,11 +348,22 @@
 		        <h4 class="modal-title">Create Opportunities</h4>
 		      </div>
 		      <div class="modal-body">
-		        <input type="text" class="form-control" placeholder="Amount" id="oppnum">
+						<input type="number" class="form-control" placeholder="#Companies" id="numComp">
+						<input type="number" class="form-control" placeholder="Min Oppy Value" id="minValue">
+						<input type="number" class="form-control" placeholder="Max Oppy Value" id="maxValue">
+						<input type="number" class="form-control" placeholder="min TTC" id="minTTC">
+						<input type="number" class="form-control" placeholder="max TTC" id="maxTTC">
 		      </div>
 		      <div class="modal-footer">
 		      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      	<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="generateOpportunities(document.getElementById('oppnum').value)">Create</button>
+						<button type="button" class="btn btn-primary" 
+																	data-dismiss="modal" 
+																	onclick="generateOpportunities(document.getElementById('numComp').value, 
+																																document.getElementById('minValue').value,
+																																document.getElementById('maxValue').value,
+																																document.getElementById('minTTC').value,
+																																document.getElementById('maxTTC').value,
+						)">Create</button>
 		      </div>
 		    </div>
 
